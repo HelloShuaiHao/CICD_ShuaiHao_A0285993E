@@ -1,0 +1,14 @@
+name: My closest CI project to real world development
+on:
+    push:
+        branches:
+            - v\d\.\d
+jobs:
+    myCI:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Git branch name
+              uses: EthanSK/git-branch-name-action@v1
+            - name : Echo the branch name
+              run: echo "${GIT_BRANCH_NAME}"
+        
