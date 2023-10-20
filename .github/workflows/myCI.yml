@@ -41,12 +41,29 @@ jobs:
               payload: |
                 {
                   "text": "e1221805",
-                  "blocks": [
-                    {
-                      "type": "header",
-                      "text": "New request"
-                    }
-                  ] 
+                  "blocks": 
+                    [
+                      {
+                        "type": "header",
+                        "text": {
+                          "type": "plain_text",
+                          "text": "New request"
+                        }
+                      },
+                      {
+                        "type": "section",
+                        "fields": [
+                          {
+                            "type": "mrkdwn",
+                            "text": "*Type:*\nPaid Time Off"
+                          },
+                          {
+                            "type": "mrkdwn",
+                            "text": "*Created by:*\n<example.com|Fred Enriquez>"
+                          }
+                        ]
+                      }
+                    ]
                 }
             env:
               SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
