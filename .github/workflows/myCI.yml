@@ -40,17 +40,13 @@ jobs:
             with:
               payload: |
                 {
-                  "text":"e1221805",
-                  "blocks": [
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "Github action build result: ${{ job.status }}"
-                      }
-                    }
-                  ]
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "New Paid Time Off request from <example.com|Fred Enriquez>\n\n<https://example.com|View request>"
+                  }
                 }
+              
             env:
               SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
               SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
