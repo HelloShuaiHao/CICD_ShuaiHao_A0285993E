@@ -33,7 +33,7 @@ jobs:
               vuln-type: 'os,library'
               severity: 'CRITICAL,HIGH' # 打开CRITICAL就会失败 关闭就会成功：'CRITICAL,HIGH'
               output: 'trivy-results.txt'
-          # 通过检查文件里有没有存在CRITICAL这个关键字设置全局变量
+          # 通过检查文件里有没有存在CRITICAL这个关键字设置全局变量 
           - name: Check and Trivy results
             run: |
               if grep -q "HIGH" trivy-results.txt; then
