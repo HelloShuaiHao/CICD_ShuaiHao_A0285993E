@@ -47,16 +47,12 @@ jobs:
                         "type": "header",
                         "text": {
                           "type": "plain_text",
-                          "text": "Notification"
+                          "text": "*Author:*\n<${{github.repositoryUrl}}|${{github.repository_owner}}>"
                         }
                       },
                       {
                         "type": "section",
-                        "fields": [
-                          {
-                            "type": "mrkdwn",
-                            "text": "*${{github.repository_owner}}"
-                          },                          
+                        "fields": [                        
                           {
                             "type": "mrkdwn",
                             "text": "*Ref:*\n${{github.ref}}"
