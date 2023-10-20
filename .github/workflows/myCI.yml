@@ -55,11 +55,11 @@ jobs:
                         "fields": [
                           {
                             "type": "mrkdwn",
-                            "text": "*Type:*\nPaid Time Off"
+                            "text": "*Ref:*\n${{github.action_ref}}"
                           },
                           {
                             "type": "mrkdwn",
-                            "text": "*Created by:*\n<example.com|Fred Enriquez>"
+                            "text": "*Event:*\n${{github.action}}"
                           }
                         ]
                       }
