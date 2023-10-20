@@ -6,6 +6,7 @@ on:
                       
 env:
   ifVulnerable: false
+  ifNORUN: false
 jobs:
     stopWorkflow:
       runs-on: ubuntu-latest
@@ -35,7 +36,7 @@ jobs:
           # 通过检查文件里有没有存在CRITICAL这个关键字设置全局变量 
           - name: Check and Trivy results
             run: |
-              if grep -q "CRITICAL: 0" trivy-results.txt; then
+              if grep -q "Total: 0" trivy-results.txt; then
                 echo "ifVulnerable=true" >> $GITHUB_ENV                
                 cat trivy-results.txt
               fi
