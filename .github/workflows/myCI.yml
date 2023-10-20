@@ -159,7 +159,7 @@ jobs:
           run: |
             cosign sign --yes --key env://COSIGN_PRIVATE_KEY "${TAGS}"
           env:
-            TAGS: sh20010217/shuaihao:${{ github.sha }}
+            TAGS: ${{ github.sha }}
             COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
             COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
 
