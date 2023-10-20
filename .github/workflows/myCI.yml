@@ -47,7 +47,7 @@ jobs:
                         "type": "header",
                         "text": {
                           "type": "plain_text",
-                          "text": "New request"
+                          "text": "Notification"
                         }
                       },
                       {
@@ -55,7 +55,7 @@ jobs:
                         "fields": [
                           {
                             "type": "mrkdwn",
-                            "text": "${{github.repository_owner}}"
+                            "text": "*Owner: ${{github.repository.Owner}}"
                           },
                           {
                             "type": "mrkdwn",
