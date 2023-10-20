@@ -109,7 +109,7 @@ jobs:
             env:
               SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
               SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-          - name: Upload the report to slack
+          - name: Upload the report to slack 
             if: ${{env.ifVulnerable == 'true'}}
             id: upload
             uses: MeilCli/slack-upload-file@v3
