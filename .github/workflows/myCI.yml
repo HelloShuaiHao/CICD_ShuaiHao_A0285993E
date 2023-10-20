@@ -63,7 +63,11 @@ jobs:
                           },
                           {
                             "type": "mrkdwn",
-                            "text": "*Actions URL:*\n<https://github.com/HelloShuaiHao/CICD_ShuaiHao_A0285993E|CICD-Assignment>"
+                            "text": "*Actions URL:*\n<${{ github.action_path }}|CICD-Assignment>"
+                          },
+                          {
+                            "type": "mrkdwn",
+                            "text": "*Commit:*\n<${{github.repositoryUrl}}/comit/${{github.sha}}|CICD-Assignment>"
                           }
                         ]
                       }
