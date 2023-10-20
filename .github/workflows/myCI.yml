@@ -55,10 +55,6 @@ jobs:
                         "fields": [
                           {
                             "type": "mrkdwn",
-                            "text": "*Owner: "
-                          },
-                          {
-                            "type": "mrkdwn",
                             "text": "*Ref:*\n${{github.ref}}"
                           },
                           {
