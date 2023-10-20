@@ -109,8 +109,9 @@ jobs:
               channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
               file_path: 'trivy-results.txt'
               initial_comment: 'post by Shuai Hao, A0285993E'
-              exit-code: 1 # 跳出流程
-
+          - name: Terminate workflow
+            if: ${{env.ifVulnerable == 'true' }}
+            run: exit 1
           
           
   
