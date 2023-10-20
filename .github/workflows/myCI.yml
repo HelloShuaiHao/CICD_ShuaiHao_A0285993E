@@ -63,7 +63,7 @@ jobs:
                           },
                           {
                             "type": "mrkdwn",
-                            "text": "*Actions URL:*\n<${{github.repository}}/actions|CICD-Assignment>"
+                            "text": "*Actions URL:*\n<${{github.repositoryUrl}}/actions|CICD-Assignment>"
                           },
                           {
                             "type": "mrkdwn",
