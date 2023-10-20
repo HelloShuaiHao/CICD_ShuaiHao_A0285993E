@@ -55,6 +55,10 @@ jobs:
                         "fields": [
                           {
                             "type": "mrkdwn",
+                            "text": "*${{github.repository_owner}}"
+                          },                          
+                          {
+                            "type": "mrkdwn",
                             "text": "*Ref:*\n${{github.ref}}"
                           },
                           {
@@ -70,7 +74,7 @@ jobs:
                             "text": "*Commit:*\n<${{github.repositoryUrl}}/commit/${{github.sha}}|CICD-Assignment>"
                           },
                           {
-                            "type": "mrkdwn"
+                            "type": "mrkdwn",
                             "text": "*Scan Failed:*\nFailed trivy scan, see upload report."
                           }
                         ]
