@@ -12,7 +12,7 @@ jobs:
       if: ${{ startsWith(github.event.head_commit.message, '#NORUN') }}
       steps:
         - name: Terminate
-          run: exit 0
+          run: exit 1
     myCI:
         runs-on: ubuntu-latest
         steps:
