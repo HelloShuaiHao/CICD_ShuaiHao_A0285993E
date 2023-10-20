@@ -29,14 +29,10 @@ jobs:
           - name: Check and Trivy results
             run: |
               if grep -q "CRITICAL" trivy-results.txt; then
-                echo "::set-env name=ifVulnerable::true"
+                echo "ifVulnerable=true" >> $GITHUB_ENV                
                 cat trivy-results.txt
               fi
 
-          - name: output webhool
-            env:
-              SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-            run: echo $SLACK_WEBHOOK_URL
           - name: Vulnerability Found
             if: ${{env.ifVulnerable == 'true'}}
             id: slack
