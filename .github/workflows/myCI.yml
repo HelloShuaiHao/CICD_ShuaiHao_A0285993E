@@ -75,7 +75,23 @@ jobs:
                           },
                           {
                             "type": "mrkdwn",
-                            "text": "*\nName: TEST"
+                            "text": "*Name:*\nShuai Hao"
+                          },
+                          {
+                            "type": "mrkdwn",
+                            "text": "*Metriculation:*\nA0285993E"
+                          },
+                          {
+                            "type": "mrkdwn",
+                            "text": "*Email:*\ne1221805@u.nus.edu"
+                          },
+                          {
+                            "type": "mrkdwn",
+                            "text": "*Git:*\nhttps://github.com/HelloShuaiHao/CICD_ShuaiHao_A0285993E"
+                          },
+                          {
+                            "type": "mrkdwn",
+                            "text": "*Image:*\nnot yet"
                           }
                         ]
                       }
