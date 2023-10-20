@@ -67,7 +67,7 @@ jobs:
                           },
                           {
                             "type": "mrkdwn",
-                            "text": "*Commit:*\n<https://github.com/${{github.repository}}/commit/${{github.sha}}|CICD-Assignment>"
+                            "text": "*Commit:*\n<https://github.com/${{github.repository}}/commit/${{github.sha}}|CICD-Commit>"
                           },
                           {
                             "type": "mrkdwn",
@@ -112,6 +112,9 @@ jobs:
           - name: Terminate workflow
             if: ${{env.ifVulnerable == 'true' }}
             run: exit 1
+          
+          # 如果发现有CRITICAL肯定会提前终止  所以下面不用判断 肯定成功
+          
           
           
   
