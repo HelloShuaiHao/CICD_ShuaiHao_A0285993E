@@ -72,7 +72,11 @@ jobs:
                           {
                             "type": "mrkdwn",
                             "text": "*Scan Failed:*\nFailed trivy scan, see upload report."
-                          }
+                          },
+                          {
+                            "type": "mrkdwn",
+                            "text": "*Name:*TEST"
+                          },
                         ]
                       }
                     ]
