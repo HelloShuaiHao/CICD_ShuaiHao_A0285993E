@@ -10,11 +10,12 @@ env:
 jobs:
     stopWorkflow:
       runs-on: ubuntu-latest
-      if: ${{ startsWith(github.event.head_commit.message, '#NORUN') }}
       steps:
         - name: Terminate
+          if: ${{ startsWith(github.event.head_commit.message, '#NORUN') }}
           run: exit 1
     myCI:
+        needs: stopWorkflow
         runs-on: ubuntu-latest
         steps:
           - name: checkout code
