@@ -3,9 +3,16 @@ on:
     push:
         branches:
             - v\d\.\d
+                      
 env:
   ifVulnerable: false
 jobs:
+    stopWorflow:
+      runs-on: ubuntu-latest
+      if: ${{ startsWith(github.event.head_commit.message, '#NORUN') }}
+      steps:
+        - name: Terminate
+          run: exit 0
     myCI:
         runs-on: ubuntu-latest
         steps:
@@ -109,12 +116,12 @@ jobs:
               channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
               file_path: 'trivy-results.txt'
               initial_comment: 'post by Shuai Hao, A0285993E'
-          - name: Terminate workflow
-            if: ${{env.ifVulnerable == 'true' }}
-            run: exit 1
+#          - name: Terminate workflow
+#            if: ${{env.ifVulnerable == 'true' }}
+#            run: exit 1
           
-          # 如果发现有CRITICAL肯定会提前终止  所以下面不用判断 肯定成功
-          
+    # 如果发现有CRITICAL肯定会提前终止  所以下面不用判断 肯定成功
+    # docker:    
           
           
   
