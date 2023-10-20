@@ -144,6 +144,7 @@ jobs:
             password: ${{ secrets.DOCKERHUB_TOKEN }}
         -
           name: Build and push
+          id: build-and-push
           uses: docker/build-push-action@v5
           with:
             push: true
@@ -153,7 +154,14 @@ jobs:
           with: 
             cosign-release: 'v2.1.1'
         - name: Check install!
-          run: cosign version            
+          run: cosign version   
+        - name: Sign image with a key
+          run: |
+            cosign sign --yes --key env://COSIGN_PRIVATE_KEY "${TAGS}"
+          env:
+            TAGS: sh20010217/shuaihao:${{ github.sha }}
+            COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+            COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
 
           
 
