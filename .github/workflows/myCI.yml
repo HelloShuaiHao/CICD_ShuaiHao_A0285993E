@@ -31,12 +31,12 @@ jobs:
               exit-code: '0'       # 出错以后不退出 继续执行 根据全局变量判断有无ciritical vulnerability
               ignore-unfixed: true
               vuln-type: 'os,library'
-              severity: 'CRITICAL,HIGH'
+              severity: 'CRITICAL,HIGH' # 打开CRITICAL就会失败 关闭就会成功：'CRITICAL,HIGH'
               output: 'trivy-results.txt'
           # 通过检查文件里有没有存在CRITICAL这个关键字设置全局变量
           - name: Check and Trivy results
             run: |
-              if grep -q "CRITICAL" trivy-results.txt; then
+              if grep -q "HIGH" trivy-results.txt; then
                 echo "ifVulnerable=true" >> $GITHUB_ENV                
                 cat trivy-results.txt
               fi
@@ -117,12 +117,14 @@ jobs:
               channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
               file_path: 'trivy-results.txt'
               initial_comment: 'post by Shuai Hao, A0285993E'
-#          - name: Terminate workflow
-#            if: ${{env.ifVulnerable == 'true' }}
-#            run: exit 1
+          - name: Terminate workflow
+            if: ${{env.ifVulnerable == 'true' }}
+            run: exit 1
           
     # 如果发现有CRITICAL肯定会提前终止  所以下面不用判断 肯定成功
-    # docker:    
+    
+          
+
           
           
   
