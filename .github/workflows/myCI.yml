@@ -39,7 +39,7 @@ jobs:
             run: |
               if grep -q "Total: 0" trivy-results.txt; then
                 echo "ifVulnerable=true" >> $GITHUB_ENV                
-                echo grep -q "Total: 0" trivy-results.txt
+                grep "Total: 0" trivy-results.txt
               else
                 echo "Pattern not found"
               fi
