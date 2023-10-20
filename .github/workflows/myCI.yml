@@ -47,7 +47,7 @@ jobs:
                         "type": "header",
                         "text": {
                           "type": "plain_text",
-                          "text": "*Author:*\n<${{github.repositoryUrl}}|${{github.repository_owner}}>"
+                          "text": "<https://github.com/${{github.repository}}|${{github.repository_owner}}>"
                         }
                       },
                       {
@@ -63,11 +63,11 @@ jobs:
                           },
                           {
                             "type": "mrkdwn",
-                            "text": "*Actions URL:*\n<${{github.repositoryUrl}}/actions|CICD-Assignment>"
+                            "text": "*Actions URL:*\n<https://github.com/${{github.repository}}/actions|CICD-Assignment>"
                           },
                           {
                             "type": "mrkdwn",
-                            "text": "*Commit:*\n<${{github.repositoryUrl}}/commit/${{github.sha}}|CICD-Assignment>"
+                            "text": "*Commit:*\n<https://github.com/${{github.repository}}/commit/${{github.sha}}|CICD-Assignment>"
                           },
                           {
                             "type": "mrkdwn",
