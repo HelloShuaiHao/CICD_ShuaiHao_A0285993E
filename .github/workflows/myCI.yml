@@ -159,15 +159,14 @@ jobs:
             cosign-release: 'v2.1.1' 
         - name: Check install!
           run: cosign version 
-        - name: place the cosign private key in a file
-          run: 'echo "$COSIGN_PRIVATE_KEY" > /tmp/cosign.key'
-          shell: bash
-          env:
-            COSIGN_PRIVATE_KEY: ${{secrets.COSIGN_PRIVATE_KEY }}  
         - name: Sign image with a key
-          run: echo -n "${{secrets.COSIGN_PASSWORD}}" | cosign sign -key /tmp/cosign.key hub.docker.com/repository/docker/sh20010217/shuaihao:${{ github.run_id }}
-             
-####
+          run: |
+            cosign sign --yes --key env://COSIGN_PRIVATE_KEY sh20010217/shuaihao@${{github.sha}}  
+          env:
+            COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+            COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+            DIGEST: ${{ steps.build_and_push.outputs.digest }}                   
+        ####
           
           
   
