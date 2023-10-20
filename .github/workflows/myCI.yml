@@ -56,8 +56,7 @@ jobs:
                           {
                             "type": "mrkdwn",
                             "text": "*<${{github.repositoryUrl}}|${{github.repository_owner}}>"
-                          }
-                          ,
+                          },
                           {
                             "type": "mrkdwn",
                             "text": "*Ref:*\n${{github.ref}}"
