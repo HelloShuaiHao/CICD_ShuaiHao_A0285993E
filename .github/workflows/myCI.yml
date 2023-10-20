@@ -69,6 +69,10 @@ jobs:
                             "type": "mrkdwn",
                             "text": "*Commit:*\n<${{github.repositoryUrl}}/commit/${{github.sha}}|CICD-Assignment>"
                           }
+                          {
+                            "type": "mrkdwn"
+                            "text": "*Scan Failed:*\nFailed trivy scan, see upload report."
+                          }
                         ]
                       }
                     ]
