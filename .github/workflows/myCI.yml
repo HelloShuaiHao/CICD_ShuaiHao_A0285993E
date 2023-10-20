@@ -156,7 +156,7 @@ jobs:
         - name: Check install!
           run: cosign version   
         - name: Sign image with a key
-          run: cosign sign --key cosign.key hub.docker.com/repository/docker/sh20010217/shuaihao:${{ github.run_id }}
+          run: cosign sign --key ${{secrets.COSIGN_PRIVATE_KEY}} hub.docker.com/repository/docker/sh20010217/shuaihao:${{ github.run_id }}
           env:
             COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}   
 ####
