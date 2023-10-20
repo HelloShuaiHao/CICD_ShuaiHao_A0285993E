@@ -75,7 +75,7 @@ jobs:
                           },
                           {
                             "type": "mrkdwn",
-                            "text": "*Name:*TEST"
+                            "text": "*\nName: TEST"
                           }
                         ]
                       }
