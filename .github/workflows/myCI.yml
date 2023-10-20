@@ -147,7 +147,7 @@ jobs:
           uses: docker/build-push-action@v5
           with:
             push: true
-            tags: shuaihao/go-fortune:${{github.sha}} 
+            tags: sh20010217/shuaihao:${{github.sha}} 
 ## dckr_pat_s0d-_0Dh5VBxvUYnOYuv8lspqHw
           
 
