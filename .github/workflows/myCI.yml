@@ -3,10 +3,56 @@ on:
     push:
         branches:
             - v\d\.\d
+env:
+  ifVulnerable: false
 jobs:
     myCI:
         runs-on: ubuntu-latest
         steps:
-        - name: Checkout vulnerability
-          uses: actions/checkout@master
+          - name: checkout code
+            uses: actions/checkout@v4
+          - name: Build an image from Dockerfile
+            run: |
+              docker build -t docker.io/my-organization/my-app:${{github.sha}} .
+          - name: Run Trivy vulnerability scanner
+            id: trivy
+            uses: aquasecurity/trivy-action@master
+            with:
+              image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}' # 对之前的image进行扫描
+              format: 'table'
+              exit-code: '0'       # 出错以后不退出 继续执行 根据全局变量判断有无ciritical vulnerability
+              ignore-unfixed: true
+              vuln-type: 'os,library'
+              severity: 'CRITICAL,HIGH'
+              output: 'trivy-results.txt'
+          # 通过检查文件里有没有存在CRITICAL这个关键字设置全局变量
+          - name: Check and Trivy results
+            run: |
+              if grep -q "CRITICAL" trivy-results.txt; then
+                echo "::set-env name=ifVulnerable::true"
+                cat trivy-results.txt
+              fi
+
+          - name: output webhool
+            env:
+              SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+            run: echo $SLACK_WEBHOOK_URL
+          - name: Vulnerability Found
+            if: ${{env.ifVulnerable == 'true'}}
+            id: slack
+            uses: slackapi/slack-github-action@v1.24.0
+            with:
+              payload: |
+                {
+                  "text":"text"
+                }
+            env:
+              SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+              SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+          
+          
+  
+
+
+          
         
