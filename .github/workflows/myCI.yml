@@ -157,7 +157,7 @@ jobs:
           run: cosign version   
         - name: Sign image with a key
           run: |
-            cosign sign --yes --key env://COSIGN_PRIVATE_KEY sh20010217/shuaihao:"${TAGS}"
+            cosign sign --yes --key cosign.key sh20010217/shuaihao:"${TAGS}"
           env:
             TAGS: ${{ github.sha }}
             COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
