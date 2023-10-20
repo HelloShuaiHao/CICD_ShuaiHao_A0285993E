@@ -156,14 +156,9 @@ jobs:
         - name: Check install!
           run: cosign version   
         - name: Sign image with a key
-          run: |
-            cosign sign --yes --key env://COSIGN_PRIVATE_KEY sh20010217/shuaihao:"${TAGS}@${DIGEST}"
+          run: cosign sign --key cosign.key hub.docker.com/repository/docker/sh20010217/shuaihao:${{ github.run_id }}
           env:
-            TAGS: ${{ github.sha }}
-            COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
-            COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
-            DIGEST: ${{ steps.build-and-push.outputs.digest }}
-   
+            COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}   
 ####
           
           
