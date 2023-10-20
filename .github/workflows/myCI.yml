@@ -55,7 +55,7 @@ jobs:
                         "fields": [
                           {
                             "type": "mrkdwn",
-                            "text": "*${{github.repository_owner}}"
+                            "text": "${{github.repository_owner}}"
                           },
                           {
                             "type": "mrkdwn",
