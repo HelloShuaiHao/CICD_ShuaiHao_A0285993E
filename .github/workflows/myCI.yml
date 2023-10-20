@@ -37,7 +37,7 @@ jobs:
           # 通过检查文件里有没有存在CRITICAL这个关键字设置全局变量 
           - name: Check Trivy results
             run: |
-              if grep "Total: 0" trivy-results.txt; then
+              if grep -q "Total: 0" trivy-results.txt; then
                 echo "ifVulnerable=true" >> $GITHUB_ENV                
                 cat trivy-results.txt
               else
