@@ -126,7 +126,7 @@ jobs:
             run: exit 1
    
     # 如果发现有CRITICAL肯定会提前终止  所以下面不用判断 肯定成功
-    docker:
+    docker-cosign:
       needs: myCI
       runs-on: ubuntu-latest
       steps:
@@ -148,7 +148,13 @@ jobs:
           with:
             push: true
             tags: sh20010217/shuaihao:${{github.sha}} 
-## dckr_pat_s0d-_0Dh5VBxvUYnOYuv8lspqHw
+        - name: Install Cosign
+          uses: sigstore/cosign-installer@v3.1.1
+          with: 
+            cosign-release: 'v2.1.1'
+        - name: Check install!
+          run: cosign version            
+
           
 
           
