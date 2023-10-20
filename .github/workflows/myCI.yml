@@ -35,7 +35,7 @@ jobs:
 
           - name: Vulnerability Found
             if: ${{env.ifVulnerable == 'true'}}
-            id: slack
+            id: notify
             uses: slackapi/slack-github-action@v1.24.0
             with:
               payload: |
@@ -47,7 +47,7 @@ jobs:
                         "type": "header",
                         "text": {
                           "type": "plain_text",
-                          "text": "<https://github.com/${{github.repository}}|${{github.repository_owner}}>"
+                          "text": "https://github.com/${{github.repository}}"
                         }
                       },
                       {
@@ -80,6 +80,17 @@ jobs:
             env:
               SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
               SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+          - name: Upload the report to slack
+            if: ${{env.ifVulnerable == 'true'}}
+            id: upload
+            uses: MeilCli/slack-upload-file@v3
+            with:
+              slack_token: ${{ secrets.SLACK_TOKEN }}
+              channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
+              file_path: 'trivy-results.txt'
+              initial_comment: 'post by slack-upload-file'
+
+
           
           
   
