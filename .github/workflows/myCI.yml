@@ -40,16 +40,7 @@ jobs:
             with:
               payload: |
                 {
-                  "text":"e1221805",
-                  "blocks": [
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "Github action build result: ${{ job.status }}"
-                      }
-                    }
-                  ]
+                  "text":"e1221805"
                 }
             env:
               SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
