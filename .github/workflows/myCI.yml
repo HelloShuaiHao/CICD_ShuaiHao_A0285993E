@@ -34,7 +34,7 @@ jobs:
               vuln-type: 'os,library'
               severity: 'CRITICAL' # 打开HIGH就会失败 关闭就会成功：'CRITICAL,HIGH'
               output: 'trivy-results.txt'
-          # 通过检查文件里有没有存在CRITICAL这个关键字设置全局变量 
+          # 通过检查文件里有没有存在CRITICAL这个关键字设置全局变量 接下来要尝试新的检查方案 所以新开一个分支
           - name: Check Trivy results
             run: |
               line_count=$(cat trivy-results.txt | wc -l)
