@@ -33,8 +33,10 @@ jobs:
             vuln-type: 'os,library'
             severity: 'CRITICAL,HIGH' # 打开HIGH就会失败 关闭就会成功：'CRITICAL,HIGH'
             output: 'trivy-results.txt'
+          env:
+            TRIVY_EXIT_CODE: ${{ job.status }}
         - name: SendVulnerabilityToSlack
-          if: ${{steps.trivy.outputs == '1'}}
+          if: ${{steps.trivy.outputs.TRIVY_EXIT_CODE == 'failure'}}
           uses: slackapi/slack-github-action@v1.24.0
           with:
             payload: |
@@ -100,7 +102,7 @@ jobs:
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
             SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK          
         - name: Upload the report to slack 
-          if: ${{steps.trivy.outputs == '1'}}
+          if: ${{steps.trivy.outputs.TRIVY_EXIT_CODE == 'failure'}}
           id: upload
           uses: MeilCli/slack-upload-file@v3
           with:
@@ -109,7 +111,7 @@ jobs:
             file_path: 'trivy-results.txt'
             initial_comment: 'post by Shuai Hao, A0285993E'
         - name: Terminate workflow
-          if: ${{steps.trivy.outputs == '1'}}        
+          if: ${{steps.trivy.outputs.TRIVY_EXIT_CODE == 'failure'}}        
           run: exit 1
 
   
