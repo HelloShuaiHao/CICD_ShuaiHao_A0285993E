@@ -1,8 +1,6 @@
 name: My closest CI project to real world development
 on:
     push:
-        branches:
-            - v\d\.\d
                       
 env:
   ifVulnerable: false
