@@ -37,7 +37,7 @@ jobs:
     SendVulnerabilityToSlack:
       runs-on: ubuntu-latest
       needs: BuildAndScan
-      if: ${{ needs.BuildAndScan.result == 'failure' }}
+      if: ${{ needs.BuildAndScan.outputs.trivy == '1' }}
       steps:  
         - name: Vulnerability Found
           if: ${{env.ifVulnerable == 'true'}}
@@ -53,7 +53,7 @@ jobs:
                       "type": "header",
                       "text": {
                         "type": "plain_text",
-                        "text": "https://github.com/${{github.repository}}"
+                        "text": "From ShuaiHao_A0285993E"
                       }
                     },
                     {
@@ -122,6 +122,7 @@ jobs:
     # 如果发现有CRITICAL肯定会提前终止  所以下面不用判断 肯定成功
     docker-cosign:
       needs: BuildAndScan
+      if: ${{ needs.BuildAndScan.outputs.trivy == '0' }}
       runs-on: ubuntu-latest
       permissions:
         contents: read
@@ -177,7 +178,7 @@ jobs:
                       "type": "header",
                       "text": {
                         "type": "plain_text",
-                        "text": "https://github.com/${{github.repository}}"
+                        "text": "From ShuaiHao_A0285993E"
                       }
                     }, 
                     {
