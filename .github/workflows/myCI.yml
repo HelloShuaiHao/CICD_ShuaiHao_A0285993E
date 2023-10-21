@@ -12,7 +12,7 @@ jobs:
         - name: Terminate
           if: ${{ startsWith(github.event.head_commit.message, '#NORUN')}}
           run: exit 1
-    myCI:
+    BuildAndScan:
       runs-on: ubuntu-latest
       needs: stopWorkflow
       steps:
@@ -30,7 +30,7 @@ jobs:
             exit-code: '1'       # 出错以后不退出 继续执行 根据全局变量判断有无ciritical vulnerability
             ignore-unfixed: true
             vuln-type: 'os,library'
-            severity: 'CRITICAL' # 打开HIGH就会失败 关闭就会成功：'CRITICAL,HIGH'
+            severity: 'CRITICAL,HIGH' # 打开HIGH就会失败 关闭就会成功：'CRITICAL,HIGH'
             output: 'trivy-results.txt'
 
     SendVulnerabilityToSlack:
