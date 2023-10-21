@@ -36,7 +36,7 @@ jobs:
     SendVulnerabilityToSlack:
       runs-on: ubuntu-latest
       needs: BuildAndScan
-      if: ${{needs.BuildAndScan.result == 'failure'}}
+      if: ${{ steps.trivy.output == 'failure' }}
       steps:  
         - name: Vulnerability Found
           if: ${{env.ifVulnerable == 'true'}}
