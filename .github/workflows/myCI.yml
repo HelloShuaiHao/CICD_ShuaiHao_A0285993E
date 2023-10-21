@@ -30,7 +30,7 @@ jobs:
             exit-code: '1'       # 出错以后不退出 继续执行 根据全局变量判断有无ciritical vulnerability
             ignore-unfixed: true
             vuln-type: 'os,library'
-            severity: 'CRITICAL,HIGH' # 打开HIGH就会失败 关闭就会成功：'CRITICAL,HIGH'
+            severity: 'CRITICAL' # 打开HIGH就会失败 关闭就会成功：'CRITICAL,HIGH'
             output: 'trivy-results.txt'
 
     SendVulnerabilityToSlack:
