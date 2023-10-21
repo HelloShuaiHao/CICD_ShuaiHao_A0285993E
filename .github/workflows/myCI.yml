@@ -31,7 +31,7 @@ jobs:
               exit-code: '0'       # 出错以后不退出 继续执行 根据全局变量判断有无ciritical vulnerability
               ignore-unfixed: true
               vuln-type: 'os,library'
-              severity: 'CRITICAL' # 打开HIGH就会失败 关闭就会成功：'CRITICAL,HIGH'
+              severity: 'CRITICAL,HIGH' # 打开HIGH就会失败 关闭就会成功：'CRITICAL,HIGH'
               output: 'trivy-results.txt'
 
           # 通过检查文件里有没有存在CRITICAL这个关键字设置全局变量 接下来要尝试新的检查方案 所以新开一个分支
