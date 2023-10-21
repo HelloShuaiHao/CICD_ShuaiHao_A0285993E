@@ -32,8 +32,9 @@ jobs:
               exit-code: '0'       # 出错以后不退出 继续执行 根据全局变量判断有无ciritical vulnerability
               ignore-unfixed: true
               vuln-type: 'os,library'
-              severity: 'CRITICAL' # 打开HIGH就会失败 关闭就会成功：'CRITICAL,HIGH'
+              severity: 'CRITICAL,HIGH' # 打开HIGH就会失败 关闭就会成功：'CRITICAL,HIGH'
               output: 'trivy-results.txt'
+
           # 通过检查文件里有没有存在CRITICAL这个关键字设置全局变量 接下来要尝试新的检查方案 所以新开一个分支
           - name: Check Trivy results
             run: |
@@ -43,7 +44,6 @@ jobs:
               else
                 echo "Line count is not greater than 6"
               fi
-            
 
           - name: Vulnerability Found
             if: ${{env.ifVulnerable == 'true'}}
@@ -167,7 +167,76 @@ jobs:
             COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
             DIGEST: ${{ steps.build_and_push.outputs.digest }}                   
         ######
-          
+    Send-Successful-Msg-To-Slack:
+      needs: docker-cosign
+      runs-on: ubuntu-latest
+      steps:
+        - name: Send-Msg
+          uses: slackapi/slack-github-action@v1.24.0
+          with:
+            payload: |
+              {
+                "text": "From Shuai Hao",
+                "blocks":
+                  [
+                    {
+                      "type": "header",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "From ShuaiHao_A0285993E"
+                      }
+                    }, 
+                    {
+                      "type": "section",
+                      "fields": [                        
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Ref:*\n${{github.ref}}"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Event:*\n${{github.event_name}}"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Actions URL:*\n<https://github.com/${{github.repository}}/actions|CICD-Assignment>"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Commit:*\n<https://github.com/${{github.repository}}/commit/${{github.sha}}|CICD-Commit>"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Scan Failed:*\nFailed trivy scan, see upload report."
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Name:*\nShuai Hao"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Metriculation:*\nA0285993E"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Email:*\ne1221805@u.nus.edu"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Git:*\nhttps://github.com/HelloShuaiHao/CICD_ShuaiHao_A0285993E"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Image:*\nhttps://hub.docker.com/repository/docker/sh20010217/shuaihao/general"
+                        }
+                      ]
+                    }                                       
+                  ]
+              }
+          env:
+            SLACK_WEBHOOK_URL: ${{secrets.SLACK_WEBHOOK_URL}}
+            SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK    
+      
           
   
 
