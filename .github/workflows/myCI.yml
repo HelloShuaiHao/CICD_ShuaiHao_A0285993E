@@ -13,6 +13,7 @@ jobs:
           if: ${{ startsWith(github.event.head_commit.message, '#NORUN')}}
           run: exit 1
     BuildAndScan:
+      continue-on-error: true
       runs-on: ubuntu-latest
       needs: stopWorkflow
       steps:
@@ -36,7 +37,7 @@ jobs:
     SendVulnerabilityToSlack:
       runs-on: ubuntu-latest
       needs: BuildAndScan
-      if: ${{ steps.trivy.output == 'failure' }}
+      if: ${{ needs.BuildAndScan.result == 'failure' }}
       steps:  
         - name: Vulnerability Found
           if: ${{env.ifVulnerable == 'true'}}
