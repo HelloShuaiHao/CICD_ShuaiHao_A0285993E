@@ -120,7 +120,7 @@ jobs:
 
     # 如果发现有CRITICAL肯定会提前终止  所以下面不用判断 肯定成功
     docker-cosign:
-      needs: myCI
+      needs: BuildAndScan
       runs-on: ubuntu-latest
       permissions:
         contents: read
