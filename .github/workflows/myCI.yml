@@ -2,8 +2,7 @@ name: My closest CI project to real world development
 on:
     push:
         branches:
-            - v\d\.\d
-                      
+            - v\d\.\d                 
 env:
   ifVulnerable: false
   ifNORUN: false
@@ -52,14 +51,14 @@ jobs:
             with:
               payload: |
                 {
-                  "text": "e1221805",
+                  "text": "From Shuai Hao: Successful Notification",
                   "blocks": 
                     [
                       {
                         "type": "header",
                         "text": {
                           "type": "plain_text",
-                          "text": "https://github.com/${{github.repository}}"
+                          "text": "From Shuai Hao: Successful Notification"
                         }
                       },
                       {
@@ -176,14 +175,14 @@ jobs:
           with:
             payload: |
               {
-                "text": "From Shuai Hao",
+                "text": "From Shuai Hao: Successful Notification",
                 "blocks":
                   [
                     {
                       "type": "header",
                       "text": {
                         "type": "plain_text",
-                        "text": "From ShuaiHao_A0285993E"
+                        "text": "From Shuai Hao: Successful Notification"
                       }
                     }, 
                     {
