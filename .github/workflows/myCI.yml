@@ -102,7 +102,7 @@ jobs:
                           },
                           {
                             "type": "mrkdwn",
-                            "text": "*Image:*\nnot yet"
+                            "text": "*Image:*\nhttps://hub.docker.com/repository/docker/sh20010217/shuaihao/general"
                           }
                         ]
                       }
