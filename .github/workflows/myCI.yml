@@ -169,7 +169,7 @@ jobs:
           with:
             payload: |
               {
-                "text": "From Shuai Hao"
+                "text": "From Shuai Hao",
                 "blocks":
                   [
                     {
