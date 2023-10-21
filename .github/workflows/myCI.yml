@@ -28,13 +28,13 @@ jobs:
           with:
             image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}' # 对之前的image进行扫描
             format: 'table'
-            exit-code: 1       # 出错以后不退出 继续执行 根据全局变量判断有无ciritical vulnerability
+            exit-code: '1'       # 出错以后不退出 继续执行 根据全局变量判断有无ciritical vulnerability
             ignore-unfixed: true
             vuln-type: 'os,library'
             severity: 'CRITICAL,HIGH' # 打开HIGH就会失败 关闭就会成功：'CRITICAL,HIGH'
             output: 'trivy-results.txt'
         - name: SendVulnerabilityToSlack
-          if: ${{steps.trivy.outputs == 1}}
+          if: ${{steps.trivy.outputs == '1'}}
           uses: slackapi/slack-github-action@v1.24.0
           with:
             payload: |
@@ -100,7 +100,7 @@ jobs:
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
             SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK          
         - name: Upload the report to slack 
-          if: ${{steps.trivy.outputs == 1}}
+          if: ${{steps.trivy.outputs == '1'}}
           id: upload
           uses: MeilCli/slack-upload-file@v3
           with:
@@ -109,7 +109,7 @@ jobs:
             file_path: 'trivy-results.txt'
             initial_comment: 'post by Shuai Hao, A0285993E'
         - name: Terminate workflow
-          if: ${{steps.trivy.outputs == 1}}        
+          if: ${{steps.trivy.outputs == '1'}}        
           run: exit 1
 
   
