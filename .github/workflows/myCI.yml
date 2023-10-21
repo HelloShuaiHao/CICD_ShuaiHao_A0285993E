@@ -22,7 +22,6 @@ jobs:
           run: |
             docker build -t docker.io/my-organization/my-app:${{github.sha}} .
         - name: Run Trivy vulnerability scanner
-          continue-on-error: true
           id: trivy
           uses: aquasecurity/trivy-action@master
           with:
